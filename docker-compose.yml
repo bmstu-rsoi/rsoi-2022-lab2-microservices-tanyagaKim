@@ -62,7 +62,7 @@ services:
     depends_on: 
       - postgres
     environment:
-      DATA_BASE_PORT: "5000"
+      DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "postgres"
       DATA_BASE_USER: "postgres"
       DATA_BASE_PASS: "postgres"
