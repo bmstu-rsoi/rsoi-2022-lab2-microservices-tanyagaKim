@@ -1,5 +1,6 @@
 from peewee import *
-from .base_model import BaseModel
+
+from cars_repository.models.base_model import BaseModel
 
 
 class CarsModel(BaseModel):
