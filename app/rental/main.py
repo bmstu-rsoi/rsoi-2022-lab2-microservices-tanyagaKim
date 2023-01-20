@@ -1,4 +1,5 @@
 from quart import Quart
+import psycopg2
 from rental_service.models.rental_model import RentalModel
 from rental_service.interface.get_rentals import get_rentals_blueprint
 from rental_service.interface.get_rental import get_rental_blueprint

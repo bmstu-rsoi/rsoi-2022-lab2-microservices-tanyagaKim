@@ -12,19 +12,20 @@ services:
       - db-data:/var/lib/postgresql/data
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
-      - "5432:5432"
+      - "5000:5432"
 
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 15s
       timeout: 15s
       retries: 10
-      
+
   cars_service:
     build: app/cars
     container_name: cars_service
-    depends_on: 
-      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "cars"
@@ -37,8 +38,9 @@ services:
   payment_service:
     build: app/payment
     container_name: payment_service
-    depends_on: 
-      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "payments"
@@ -51,8 +53,9 @@ services:
   rental_service:
     build: app/rental
     container_name: rental_service
-    depends_on: 
-      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
     environment:
       DATA_BASE_PORT: "5432"
       DATA_BASE_NAME: "rentals"
@@ -65,8 +68,10 @@ services:
   gateway_service:
     build: app/gateway
     container_name: gateway_service
-    depends_on: 
-      - postgres
+    depends_on:
+      - cars_service
+      - payment_service
+      - rental_service
     environment:
       CARS_SERVICE_HOST: "cars_service"
       CARS_SERVICE_PORT: "8070"

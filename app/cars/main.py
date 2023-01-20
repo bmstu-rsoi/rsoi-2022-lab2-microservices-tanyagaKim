@@ -1,4 +1,5 @@
 from quart import Quart
+import psycopg2
 from cars_repository.models.cars_model import CarsModel
 from cars_repository.interface.get_cars import get_cars_path
 from cars_repository.interface.get_car import get_car_path

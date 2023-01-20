@@ -1,5 +1,5 @@
 from peewee import *
-from .base_model import BaseModel
+from rental_service.models.base_model import BaseModel
 
 
 class RentalModel(BaseModel):

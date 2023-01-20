@@ -1,5 +1,5 @@
 from peewee import *
-from .base_model import BaseModel
+from payment_service.models.base_model import BaseModel
 
 
 class PaymentModel(BaseModel):
